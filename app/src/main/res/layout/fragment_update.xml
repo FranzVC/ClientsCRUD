@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.UpdateFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tv_updateTittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="150sp"
+            android:layout_marginRight="30sp"
+            android:text="@string/tv_update_tittle"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/tbx_nameUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="30sp"
+            android:ems="10"
+            android:hint="@string/tbx_name"
+            android:inputType="textPersonName"
+            tools:ignore="AutoFill" />
+
+        <EditText
+            android:id="@+id/tbx_emailUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="30sp"
+            android:ems="10"
+            android:hint="@string/tbx_email"
+            android:inputType="textEmailAddress"
+            tools:ignore="AutoFill" />
+
+        <EditText
+            android:id="@+id/tbx_telephoneUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="30sp"
+            android:ems="10"
+            android:hint="@string/tbx_telephone"
+            android:inputType="phone"
+            tools:ignore="AutoFill" />
+
+        <Button
+            android:id="@+id/btn_submitUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="50sp"
+            android:layout_marginRight="30sp"
+            android:text="@string/update_btn" />
+
+    </LinearLayout>
+
+</FrameLayout>

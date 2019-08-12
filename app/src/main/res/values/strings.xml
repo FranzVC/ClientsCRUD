@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CRUD-SQLite</string>
+    <string name="register_btn">Register</string>
+    <string name="search_btn">Search</string>
+    <string name="view_btn">View</string>
+    <string name="delete_btn">Delete</string>
+    <string name="update_btn">Update</string>
+    <string name="tv_register_tittle">Insert your data</string>
+    <string name="btn_submit">Submit</string>
+    <string name="tbx_name">name</string>
+    <string name="tbx_email">email</string>
+    <string name="tbx_telephone">telephone</string>
+    <string name="tv_update_tittle">Update your data</string>
+    <string name="tv_searchTittle">Insert client ID:</string>
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_show"
+        android:icon="@drawable/ic_remove_red_eye_black_24dp"
+        android:title="@string/view_btn" />
+
+    <item
+        android:id="@+id/navigation_update"
+        android:icon="@drawable/ic_replay_black_24dp"
+        android:title="@string/update_btn" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search_btn" />
+
+    <item
+        android:id="@+id/navigation_register"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="@string/register_btn" />
+
+    <item
+        android:id="@+id/navigation_delete"
+        android:icon="@drawable/ic_remove_circle_outline_black_24dp"
+        android:title="@string/delete_btn" />
+
+
+</menu>
