@@ -2,6 +2,7 @@ package com.e.crud_sqlite;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.e.crud_sqlite.fragment.DeleteFragment;
@@ -26,16 +27,17 @@ import java.sql.SQLData;
 
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 
-public class MainActivity extends AppCompatActivity {
-    private TextView mTextMessage;
+public class MainActivity extends AppCompatActivity implements
+                                                    RegisterFragment.OnFragmentInteractionListener,
+                                                    ViewFragment.OnFragmentInteractionListener,
+                                                    DeleteFragment.OnFragmentInteractionListener,
+                                                    SearchFragment.OnFragmentInteractionListener,
+                                                    UpdateFragment.OnFragmentInteractionListener{
     private RegisterFragment registerFragment;
     private UpdateFragment updateFragment;
     private DeleteFragment deleteFragment;
     private SearchFragment searchFragment;
     private ViewFragment viewFragment;
-
-    private EditText tbx_nameRegister, tbx_emailRegister, tbx_telephoneRegister;
-    private Button btn_submitRegister;
 
     private EditText tbx_nameUpdate, tbx_emailUpdate, tbx_telephoneUpdate;
     private Button btn_submitUpdate;
@@ -46,37 +48,32 @@ public class MainActivity extends AppCompatActivity {
     private EditText tbx_name, tbx_email, tbx_telephone;
     private Button btn_search;
 
-    private FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
             switch (item.getItemId()) {
                 case R.id.navigation_register:
                     fragmentTransaction.replace(R.id.fragmentContainer, registerFragment);
                     fragmentTransaction.commit();
-                    mTextMessage.setText(R.string.register_btn);
                     return true;
                 case R.id.navigation_delete:
                     fragmentTransaction.replace(R.id.fragmentContainer, deleteFragment);
                     fragmentTransaction.commit();
-                    mTextMessage.setText(R.string.delete_btn);
                     return true;
                 case R.id.navigation_show:
                     fragmentTransaction.replace(R.id.fragmentContainer, viewFragment);
                     fragmentTransaction.commit();
-                    mTextMessage.setText(R.string.view_btn);
                     return true;
                 case R.id.navigation_search:
                     fragmentTransaction.replace(R.id.fragmentContainer, searchFragment);
                     fragmentTransaction.commit();
-                    mTextMessage.setText(R.string.search_btn);
                     return true;
                 case R.id.navigation_update:
                     fragmentTransaction.replace(R.id.fragmentContainer, updateFragment);
                     fragmentTransaction.commit();
-                    mTextMessage.setText(R.string.update_btn);
                     return true;
             }
             return false;
@@ -94,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         viewFragment = new ViewFragment();
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(this, TABLE_CLIENTS, null, 1);
@@ -105,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onClickSubmitBtn(View v) {
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.e.crud_sqlite.R;
+import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
+
+import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
+import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +54,16 @@ public class RegisterFragment extends Fragment {
         tbx_email = rootView.findViewById(R.id.tbx_emailRegister);
         tbx_telephone = rootView.findViewById(R.id.tbx_telephoneRegister);
         btn_submit = rootView.findViewById(R.id.btn_submitRegister);
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = tbx_name.getText().toString();
+                String email = tbx_email.getText().toString();
+                String telephone = tbx_telephone.getText().toString();
+                ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(),TABLE_CLIENTS,null,VERSION);
+                connectionSQLiteHelper.insertClient(name,email,telephone);
+            }
+        });
         return rootView;
     }
 

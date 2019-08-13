@@ -11,6 +11,7 @@
     <string name="tbx_email">email</string>
     <string name="tbx_telephone">telephone</string>
     <string name="tv_update_tittle">Update your data</string>
-    <string name="tv_searchTittle">Insert client ID:</string>
-
+    <string name="tv_searchTittle">Insert client ID</string>
+    <string name="NOT_FOUND">NOT FOUND</string>
+    <string name="tv_resultSearchToUpdate">Client:</string>
 </resources>

@@ -16,10 +16,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
-            android:layout_marginTop="150sp"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginRight="30sp"
             android:text="@string/tv_update_tittle"
             android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/tbx_idSearchToUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="30sp"
+            android:ems="10"
+            android:hint="@string/tv_searchTittle"
+            android:inputType="textPersonName"
+            tools:ignore="AutoFill" />
+
+        <Button
+            android:id="@+id/btn_searchToUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="30sp"
+            android:text="@string/search_btn" />
+
+        <TextView
+            android:id="@+id/tv_updateResultTittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            android:text="@string/tv_resultSearchToUpdate" />
 
         <EditText
             android:id="@+id/tbx_nameUpdate"

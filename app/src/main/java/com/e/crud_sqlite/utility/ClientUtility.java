@@ -1,6 +1,7 @@
 package com.e.crud_sqlite.utility;
 
 public class ClientUtility {
+    public static final int VERSION = 1;
     public static final String TABLE_CLIENTS = "clients";
 
     public static final String COLUMN_ID = "id";

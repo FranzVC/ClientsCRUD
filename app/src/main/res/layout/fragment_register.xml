@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
-            android:layout_marginTop="150sp"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginRight="30sp"
             android:text="@string/tv_register_tittle"
             android:textAlignment="center" />
@@ -64,7 +64,6 @@
             android:layout_marginLeft="30sp"
             android:layout_marginTop="50sp"
             android:layout_marginRight="30sp"
-            android:onClick="onClickSubmitBtn"
-            android:text="@string/btn_submit" />
+            android:text="@string/register_btn" />
     </LinearLayout>
 </FrameLayout>
