@@ -79,7 +79,12 @@ public class UpdateFragment extends Fragment {
                     tbx_telephone.setText(client.get(0).get(COLUMN_TELEPHONE));
                 }else
                 {
+                    tv_tittle.setVisibility(View.GONE);
+                    tbx_idToUpdate.setVisibility(View.GONE);
+                    btn_searchToUpdate.setVisibility(View.GONE);
+                    tv_tittleResult.setVisibility(View.VISIBLE);
                     tv_tittleResult.setText(R.string.NOT_FOUND);
+                    //toast
                 }
             }
         });
