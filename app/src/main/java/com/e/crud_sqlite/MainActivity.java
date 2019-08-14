@@ -39,15 +39,6 @@ public class MainActivity extends AppCompatActivity implements
     private SearchFragment searchFragment;
     private ViewFragment viewFragment;
 
-    private EditText tbx_nameUpdate, tbx_emailUpdate, tbx_telephoneUpdate;
-    private Button btn_submitUpdate;
-
-    private EditText tbx_idDelete;
-    private Button btn_delete;
-
-    private EditText tbx_name, tbx_email, tbx_telephone;
-    private Button btn_search;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

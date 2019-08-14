@@ -54,6 +54,7 @@ public class DeleteFragment extends Fragment {
         tbx_idDelete = rootView.findViewById(R.id.tbx_idDelete);
         tv_result = rootView.findViewById(R.id.tv_deleteResult);
         btn_delete = rootView.findViewById(R.id.btn_submitDelete);
+
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +64,7 @@ public class DeleteFragment extends Fragment {
                 result = connectionSQLiteHelper.deleteClient(clientId);
                 if (result)
                 {
-                    Toast.makeText(getActivity(),R.string.SAVED,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),R.string.DELETED,Toast.LENGTH_LONG).show();
                     String clients = connectionSQLiteHelper.getClients().toString();
                     tv_result.setText(clients);
                 }else
