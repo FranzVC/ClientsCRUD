@@ -13,5 +13,9 @@
     <string name="tv_update_tittle">Update your data</string>
     <string name="tv_searchTittle">Insert client ID</string>
     <string name="NOT_FOUND">NOT FOUND</string>
+    <string name="UPDATED">CLIENT UPDATED</string>
+    <string name="SAVED">CLIENT SAVED</string>
+    <string name="DELETED">CLIENT REMOVED</string>
+    <string name="ERROR">ERROR</string>
     <string name="tv_resultSearchToUpdate">Client:</string>
 </resources>

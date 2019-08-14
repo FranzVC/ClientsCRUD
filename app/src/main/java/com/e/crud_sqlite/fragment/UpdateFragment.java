@@ -1,6 +1,7 @@
 package com.e.crud_sqlite.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
@@ -26,10 +28,11 @@ import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
 
 public class UpdateFragment extends Fragment {
+    private int FIRST_POSITION = 0;
     private OnFragmentInteractionListener mListener;
-    private TextView tv_tittle,tv_tittleResult;
-    private EditText tbx_idToUpdate,tbx_name,tbx_email,tbx_telephone;
-    private Button btn_searchToUpdate,btn_update;
+    private TextView tv_tittle, tv_tittleResult;
+    private EditText tbx_idToUpdate, tbx_name, tbx_email, tbx_telephone;
+    private Button btn_searchToUpdate, btn_update;
 
     public UpdateFragment() {
         // Required empty public constructor
@@ -52,63 +55,76 @@ public class UpdateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_update, container, false);
         tv_tittle = rootView.findViewById(R.id.tv_updateTittle);
-        tbx_idToUpdate= rootView.findViewById(R.id.tbx_idSearchToUpdate);
-        btn_searchToUpdate= rootView.findViewById(R.id.btn_searchToUpdate);
+        tbx_idToUpdate = rootView.findViewById(R.id.tbx_idSearchToUpdate);
+        btn_searchToUpdate = rootView.findViewById(R.id.btn_searchToUpdate);
+
+        tv_tittleResult = rootView.findViewById(R.id.tv_updateResultTittle);
+        tbx_name = rootView.findViewById(R.id.tbx_nameUpdate);
+        tbx_email = rootView.findViewById(R.id.tbx_emailUpdate);
+        tbx_telephone = rootView.findViewById(R.id.tbx_telephoneUpdate);
+        btn_update = rootView.findViewById(R.id.btn_submitUpdate);
+
         btn_searchToUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int clientId = Integer.parseInt(tbx_idToUpdate.getText().toString());
-                ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(),TABLE_CLIENTS,null,VERSION);
+                final int clientId = Integer.parseInt(tbx_idToUpdate.getText().toString());
+                final ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(), TABLE_CLIENTS, null, VERSION);
                 ArrayList<HashMap<String, String>> client = connectionSQLiteHelper.getClientById(clientId);
-                if (!client.isEmpty())
-                {
+                if (!client.isEmpty()) {
                     tv_tittleResult.setVisibility(View.VISIBLE);
                     tbx_name.setVisibility(View.VISIBLE);
                     tbx_email.setVisibility(View.VISIBLE);
                     tbx_telephone.setVisibility(View.VISIBLE);
                     btn_update.setVisibility(View.VISIBLE);
+
                     tv_tittle.setVisibility(View.GONE);
                     tbx_idToUpdate.setVisibility(View.GONE);
                     btn_searchToUpdate.setVisibility(View.GONE);
 
-                    tbx_name.setText(client.get(0).get(COLUMN_NAME));
-                    tbx_email.setText(client.get(0).get(COLUMN_EMAIL));
-                    tbx_telephone.setText(client.get(0).get(COLUMN_TELEPHONE));
-                }else
-                {
-                    tv_tittle.setVisibility(View.GONE);
-                    tbx_idToUpdate.setVisibility(View.GONE);
-                    btn_searchToUpdate.setVisibility(View.GONE);
-                    tv_tittleResult.setVisibility(View.VISIBLE);
-                    tv_tittleResult.setText(R.string.NOT_FOUND);
-                    //toast
+                    tbx_name.setText(client.get(FIRST_POSITION).get(COLUMN_NAME));
+                    tbx_email.setText(client.get(FIRST_POSITION).get(COLUMN_EMAIL));
+                    tbx_telephone.setText(client.get(FIRST_POSITION).get(COLUMN_TELEPHONE));
+
+                    btn_update.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String name = tbx_name.getText().toString();
+                            String email = tbx_email.getText().toString();
+                            String telephone = tbx_telephone.getText().toString();
+                            ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(), TABLE_CLIENTS, null, VERSION);
+                            boolean isUpdated = connectionSQLiteHelper.updateClient(name, email, telephone, clientId);
+                            if (isUpdated) {
+                                tv_tittle.setVisibility(View.VISIBLE);
+                                tbx_idToUpdate.setVisibility(View.VISIBLE);
+                                btn_searchToUpdate.setVisibility(View.VISIBLE);
+                                tv_tittleResult.setVisibility(View.GONE);
+                                tbx_name.setVisibility(View.GONE);
+                                tbx_email.setVisibility(View.GONE);
+                                tbx_telephone.setVisibility(View.GONE);
+                                btn_update.setVisibility(View.GONE);
+                                tbx_idToUpdate.setText("");
+                                Toast.makeText(getContext(), R.string.UPDATED, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(getContext(), R.string.NOT_FOUND, Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        tv_tittleResult= rootView.findViewById(R.id.tv_updateResultTittle);
-        tbx_name= rootView.findViewById(R.id.tbx_nameUpdate);
-        tbx_email= rootView.findViewById(R.id.tbx_emailUpdate);
-        tbx_telephone= rootView.findViewById(R.id.tbx_telephoneUpdate);
-        btn_update= rootView.findViewById(R.id.btn_submitUpdate);
-
+        tv_tittle.setVisibility(View.VISIBLE);
+        tbx_idToUpdate.setVisibility(View.VISIBLE);
+        btn_searchToUpdate.setVisibility(View.VISIBLE);
         tv_tittleResult.setVisibility(View.GONE);
         tbx_name.setVisibility(View.GONE);
         tbx_email.setVisibility(View.GONE);
         tbx_telephone.setVisibility(View.GONE);
         btn_update.setVisibility(View.GONE);
 
-
         return rootView;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

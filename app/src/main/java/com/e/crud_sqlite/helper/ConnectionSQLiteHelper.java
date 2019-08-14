@@ -36,7 +36,7 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insertClient(String name, String email, String telephone) {
+    public long insertClient(String name, String email, String telephone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
@@ -46,6 +46,7 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
 
         long newRowId = db.insert(TABLE_CLIENTS, null, cValues);
         db.close();
+        return newRowId;
     }
 
     public ArrayList<HashMap<String, String>> getClients() {
@@ -55,9 +56,9 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             HashMap<String, String> client = new HashMap<>();
-            client.put("name", cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            client.put("email", cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
-            client.put("telephone", cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
+            client.put(COLUMN_NAME, cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            client.put(COLUMN_EMAIL, cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
+            client.put(COLUMN_TELEPHONE, cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
             clientList.add(client);
         }
         cursor.close();
@@ -67,13 +68,13 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
     public ArrayList<HashMap<String, String>> getClientById(int clientId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> clientList = new ArrayList<>();
-        String query = "SELECT name, email, telephone FROM " + TABLE_CLIENTS;
-        Cursor cursor = db.query(TABLE_CLIENTS, new String[]{COLUMN_NAME, COLUMN_EMAIL, COLUMN_TELEPHONE}, COLUMN_ID + "=?", new String[]{String.valueOf(clientId)}, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CLIENTS, new String[]{COLUMN_NAME, COLUMN_EMAIL, COLUMN_TELEPHONE},
+                            COLUMN_ID + "=?", new String[]{String.valueOf(clientId)}, null, null, null, null);
         if (cursor.moveToNext()) {
             HashMap<String, String> client = new HashMap<>();
-            client.put("name", cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            client.put("email", cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
-            client.put("telephone", cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
+            client.put(COLUMN_NAME, cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            client.put(COLUMN_EMAIL, cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
+            client.put(COLUMN_TELEPHONE, cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
             clientList.add(client);
         }
         cursor.close();
@@ -87,9 +88,10 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
         return (flag > 0);
     }
 
-    public boolean updateClient(String email, String telephone, int id) {
+    public boolean updateClient(String name, String email, String telephone, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
+        cValues.put(COLUMN_NAME,name);
         cValues.put(COLUMN_EMAIL, email);
         cValues.put(COLUMN_TELEPHONE, telephone);
         int flag = db.update(TABLE_CLIENTS, cValues, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});

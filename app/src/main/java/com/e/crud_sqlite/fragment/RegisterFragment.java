@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
@@ -61,7 +62,13 @@ public class RegisterFragment extends Fragment {
                 String email = tbx_email.getText().toString();
                 String telephone = tbx_telephone.getText().toString();
                 ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(),TABLE_CLIENTS,null,VERSION);
-                connectionSQLiteHelper.insertClient(name,email,telephone);
+                long idClient = connectionSQLiteHelper.insertClient(name,email,telephone);
+                if(idClient != -1){
+                    Toast.makeText(getActivity(),R.string.SAVED,Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getActivity(),R.string.ERROR,Toast.LENGTH_LONG).show();
+                }
             }
         });
         return rootView;

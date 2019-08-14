@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, registerFragment).commit();
+
         ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(this, TABLE_CLIENTS, null, 1);
         SQLiteDatabase sqLiteDatabase = connectionSQLiteHelper.getWritableDatabase();
 

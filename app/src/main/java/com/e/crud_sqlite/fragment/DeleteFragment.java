@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
@@ -62,12 +63,12 @@ public class DeleteFragment extends Fragment {
                 result = connectionSQLiteHelper.deleteClient(clientId);
                 if (result)
                 {
-                    /*TODO*/
-                    String message = "CLIENT REMOVED \n"+ connectionSQLiteHelper.getClients().toString();
-                    tv_result.setText(message);
+                    Toast.makeText(getActivity(),R.string.SAVED,Toast.LENGTH_LONG).show();
+                    String clients = connectionSQLiteHelper.getClients().toString();
+                    tv_result.setText(clients);
                 }else
                 {
-                    tv_result.setText(R.string.NOT_FOUND);
+                    Toast.makeText(getActivity(),R.string.NOT_FOUND,Toast.LENGTH_LONG).show();
                 }
             }
         });
