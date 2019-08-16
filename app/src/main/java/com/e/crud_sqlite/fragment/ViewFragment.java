@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
+import com.e.crud_sqlite.model.Client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,12 +54,11 @@ public class ViewFragment extends Fragment {
         tv_clients = rootView.findViewById(R.id.tv_clients);
         ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(),TABLE_CLIENTS,null,VERSION);
 
-        ArrayList<HashMap<String, String>> clients = connectionSQLiteHelper.getClients();
-        for(HashMap<String,String> client : clients) {
-            String c = client.get(COLUMN_NAME)+" "+client.get(COLUMN_EMAIL)+" "+client.get(COLUMN_TELEPHONE) + "\n";
+        ArrayList<Client> clients = connectionSQLiteHelper.getClients();
+        for(Client client : clients) {
+            String c = client.getName()+" "+client.getEmail()+" "+client.getTelephone() + "\n";
             tv_clients.setText(tv_clients.getText().toString().concat(c));
         }
-        //tv_clients.setText(connectionSQLiteHelper.getClients().toString());
         return rootView;
     }
 

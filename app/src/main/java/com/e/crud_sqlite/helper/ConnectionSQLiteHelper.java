@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.e.crud_sqlite.model.Client;
 import com.e.crud_sqlite.utility.ClientUtility;
 
 import java.util.ArrayList;
@@ -49,32 +50,30 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public ArrayList<HashMap<String, String>> getClients() {
+    public ArrayList<Client> getClients() {
         SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> clientList = new ArrayList<>();
+        ArrayList<Client> clientList = new ArrayList<>();
         String query = "SELECT name, email, telephone FROM " + TABLE_CLIENTS;
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            HashMap<String, String> client = new HashMap<>();
-            client.put(COLUMN_NAME, cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            client.put(COLUMN_EMAIL, cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
-            client.put(COLUMN_TELEPHONE, cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
+            Client client = new Client( cursor.getString(cursor.getColumnIndex(COLUMN_NAME)),
+                                        cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)),
+                                        cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
             clientList.add(client);
         }
         cursor.close();
         return clientList;
     }
 
-    public ArrayList<HashMap<String, String>> getClientById(int clientId) {
+    public ArrayList<Client> getClientById(int clientId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<HashMap<String, String>> clientList = new ArrayList<>();
+        ArrayList<Client> clientList = new ArrayList<>();
         Cursor cursor = db.query(TABLE_CLIENTS, new String[]{COLUMN_NAME, COLUMN_EMAIL, COLUMN_TELEPHONE},
                             COLUMN_ID + "=?", new String[]{String.valueOf(clientId)}, null, null, null, null);
         if (cursor.moveToNext()) {
-            HashMap<String, String> client = new HashMap<>();
-            client.put(COLUMN_NAME, cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            client.put(COLUMN_EMAIL, cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
-            client.put(COLUMN_TELEPHONE, cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
+            Client client = new Client( cursor.getString(cursor.getColumnIndex(COLUMN_NAME)),
+                                        cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)),
+                                        cursor.getString(cursor.getColumnIndex(COLUMN_TELEPHONE)));
             clientList.add(client);
         }
         cursor.close();

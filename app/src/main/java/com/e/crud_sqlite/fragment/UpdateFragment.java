@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
+import com.e.crud_sqlite.model.Client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,7 +72,7 @@ public class UpdateFragment extends Fragment {
             public void onClick(View view) {
                 final int clientId = Integer.parseInt(tbx_idToUpdate.getText().toString());
                 final ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(), TABLE_CLIENTS, null, VERSION);
-                ArrayList<HashMap<String, String>> client = connectionSQLiteHelper.getClientById(clientId);
+                ArrayList<Client> client = connectionSQLiteHelper.getClientById(clientId);
                 if (!client.isEmpty()) {
                     tv_tittleResult.setVisibility(View.VISIBLE);
                     tbx_name.setVisibility(View.VISIBLE);
@@ -83,9 +84,9 @@ public class UpdateFragment extends Fragment {
                     tbx_idToUpdate.setVisibility(View.GONE);
                     btn_searchToUpdate.setVisibility(View.GONE);
 
-                    tbx_name.setText(client.get(FIRST_POSITION).get(COLUMN_NAME));
-                    tbx_email.setText(client.get(FIRST_POSITION).get(COLUMN_EMAIL));
-                    tbx_telephone.setText(client.get(FIRST_POSITION).get(COLUMN_TELEPHONE));
+                    tbx_name.setText(client.get(FIRST_POSITION).getName());
+                    tbx_email.setText(client.get(FIRST_POSITION).getEmail());
+                    tbx_telephone.setText(client.get(FIRST_POSITION).getTelephone());
 
                     btn_update.setOnClickListener(new View.OnClickListener() {
                         @Override

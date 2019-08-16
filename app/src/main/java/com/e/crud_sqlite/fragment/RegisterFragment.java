@@ -2,6 +2,7 @@ package com.e.crud_sqlite.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ResourceCursorTreeAdapter;
 import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
@@ -86,6 +88,7 @@ public class RegisterFragment extends Fragment {
         });
         iv_avatarImage = rootView.findViewById(R.id.iv_avatarImage);
         btn_takePicture = rootView.findViewById(R.id.btn_takePicture);
+
         btn_takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +98,6 @@ public class RegisterFragment extends Fragment {
                 }
             }
         });
-
         return rootView;
     }
 
@@ -106,10 +108,11 @@ public class RegisterFragment extends Fragment {
         if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
             Bitmap pictureTaken = (Bitmap) data.getExtras().get("data");
             //iv_avatarImage.setImageBitmap(pictureTaken);
-            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(),pictureTaken);
-            dr.setCircular(true);
+            RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getResources(),pictureTaken);
+            drawable.setCircular(true);
+
             iv_avatarImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv_avatarImage.setImageDrawable(dr);
+            iv_avatarImage.setImageDrawable(drawable);
         }
     }
 

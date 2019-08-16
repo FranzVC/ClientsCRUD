@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
+import com.e.crud_sqlite.model.Client;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,16 +58,16 @@ public class SearchFragment extends Fragment {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<HashMap<String, String>> result;
+                List<Client> listResult;
                 int clientId = Integer.parseInt(tbx_idSearch.getText().toString());
                 ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(),TABLE_CLIENTS,null,VERSION);
-                result = connectionSQLiteHelper.getClientById(clientId);
-                if (result.isEmpty())
+                listResult = connectionSQLiteHelper.getClientById(clientId);
+                if (listResult.isEmpty())
                 {
-                    tv_result.setText("NOT FOUND");
+                    tv_result.setText(R.string.NOT_FOUND);
                 }else
                 {
-                    tv_result.setText(result.toString());
+                    tv_result.setText(listResult.toString());
                 }
             }
         });
