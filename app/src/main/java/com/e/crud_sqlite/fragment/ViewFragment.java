@@ -16,11 +16,6 @@ import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 import com.e.crud_sqlite.model.Client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_EMAIL;
-import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_NAME;
-import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_TELEPHONE;
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
 

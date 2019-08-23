@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
+import com.e.crud_sqlite.model.Client;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,8 +66,11 @@ public class DeleteFragment extends Fragment {
                 if (result)
                 {
                     Toast.makeText(getActivity(),R.string.DELETED,Toast.LENGTH_LONG).show();
-                    String clients = connectionSQLiteHelper.getClients().toString();
-                    tv_result.setText(clients);
+                    List<Client> clients = connectionSQLiteHelper.getClients();
+                    for(Client client : clients) {
+                        String c = client.getName()+" "+client.getEmail()+" "+client.getTelephone() + "\n";
+                        tv_result.setText(tv_result.getText().toString().concat(c));
+                    }
                 }else
                 {
                     Toast.makeText(getActivity(),R.string.NOT_FOUND,Toast.LENGTH_LONG).show();

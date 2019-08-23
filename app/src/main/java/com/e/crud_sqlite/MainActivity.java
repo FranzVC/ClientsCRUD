@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
         registerFragment = new RegisterFragment();
@@ -85,13 +86,6 @@ public class MainActivity extends AppCompatActivity implements
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, registerFragment).commit();
-
-        ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(this, TABLE_CLIENTS, null, 1);
-        SQLiteDatabase sqLiteDatabase = connectionSQLiteHelper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-
     }
 
     @Override

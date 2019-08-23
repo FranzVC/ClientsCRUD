@@ -5,13 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import com.e.crud_sqlite.model.Client;
-import com.e.crud_sqlite.utility.ClientUtility;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_EMAIL;
 import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_ID;

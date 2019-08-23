@@ -67,7 +67,10 @@ public class SearchFragment extends Fragment {
                     tv_result.setText(R.string.NOT_FOUND);
                 }else
                 {
-                    tv_result.setText(listResult.toString());
+                    for(Client client : listResult) {
+                        String c = client.getName()+" "+client.getEmail()+" "+client.getTelephone() + "\n";
+                        tv_result.setText(tv_result.getText().toString().concat(c));
+                    }
                 }
             }
         });

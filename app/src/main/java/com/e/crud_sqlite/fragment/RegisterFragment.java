@@ -1,13 +1,16 @@
 package com.e.crud_sqlite.fragment;
 
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
@@ -20,9 +23,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ResourceCursorTreeAdapter;
 import android.widget.Toast;
 
+import com.e.crud_sqlite.MainActivity;
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 
@@ -30,16 +33,11 @@ import static android.app.Activity.RESULT_OK;
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RegisterFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class RegisterFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int TAG_SIMPLE_NOTIFICATION = 1;
+    public static final String TAG_NOTIFICATION_FRAGMENT = "fragment_notification";
+    public static final String EXTRA_FRAGMENT_TO_LAUNCH = "fragment_to_launch";
 
     private EditText tbx_name, tbx_email, tbx_telephone;
     private Button btn_submit;
@@ -81,6 +79,7 @@ public class RegisterFragment extends Fragment {
                 long idClient = connectionSQLiteHelper.insertClient(name, email, telephone);
                 if (idClient != -1) {
                     Toast.makeText(getActivity(), R.string.SAVED, Toast.LENGTH_LONG).show();
+                    //showSimpleNotification();
                 } else {
                     Toast.makeText(getActivity(), R.string.ERROR, Toast.LENGTH_LONG).show();
                 }
@@ -107,7 +106,6 @@ public class RegisterFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
             Bitmap pictureTaken = (Bitmap) data.getExtras().get("data");
-            //iv_avatarImage.setImageBitmap(pictureTaken);
             RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getResources(),pictureTaken);
             drawable.setCircular(true);
 
@@ -115,6 +113,49 @@ public class RegisterFragment extends Fragment {
             iv_avatarImage.setImageDrawable(drawable);
         }
     }
+
+    /*private PendingIntent pendingIntentForNotification() {
+        //Create the intent you want to show when the notification is clicked
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+
+        //Add any extras (in this case, that you want to relaunch this fragment)
+        intent.putExtra(EXTRA_FRAGMENT_TO_LAUNCH, TAG_NOTIFICATION_FRAGMENT);
+
+        //This will hold the intent you've created until the notification is tapped.
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 1, intent, 0);
+        return pendingIntent;
+    }*/
+
+    /*private void showSimpleNotification() {
+        //Use the NotificationCompat compatibility library in order to get gingerbread support.
+        Notification notification = new NotificationCompat.Builder(getActivity())
+                //Title of the notification
+                .setContentTitle("hola")
+                //Content of the notification once opened
+                .setContentText("chau")
+                //This bit will show up in the notification area in devices that support that
+                .setTicker("wwwww")
+                //Icon that shows up in the notification area
+                .setSmallIcon(R.drawable.ic_add_black_24dp)
+                //Icon that shows up in the drawer
+
+                //Set the intent
+                .setContentIntent(pendingIntentForNotification())
+                //Build the notification with all the stuff you've just set.
+                .build();
+
+        //Add the auto-cancel flag to make it dismiss when clicked on
+        //This is a bitmask value so you have to pipe-equals it.
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        //Grab the NotificationManager and post the notification
+        NotificationManager notificationManager = (NotificationManager)
+                getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        //Set a tag so that the same notification doesn't get reposted over and over again and
+        //you can grab it again later if you need to.
+        notificationManager.notify(TAG_SIMPLE_NOTIFICATION, notification);
+    }*/
 
     @Override
     public void onAttach(Context context) {
