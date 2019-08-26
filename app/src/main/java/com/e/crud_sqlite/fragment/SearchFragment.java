@@ -1,7 +1,6 @@
 package com.e.crud_sqlite.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,7 +17,6 @@ import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 import com.e.crud_sqlite.model.Client;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;

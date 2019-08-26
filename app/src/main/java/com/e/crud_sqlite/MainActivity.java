@@ -1,7 +1,5 @@
 package com.e.crud_sqlite;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,22 +8,12 @@ import com.e.crud_sqlite.fragment.RegisterFragment;
 import com.e.crud_sqlite.fragment.SearchFragment;
 import com.e.crud_sqlite.fragment.UpdateFragment;
 import com.e.crud_sqlite.fragment.ViewFragment;
-import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import java.sql.SQLData;
-
-import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 
 public class MainActivity extends AppCompatActivity implements
                                                     RegisterFragment.OnFragmentInteractionListener,

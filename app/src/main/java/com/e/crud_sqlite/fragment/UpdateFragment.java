@@ -1,7 +1,6 @@
 package com.e.crud_sqlite.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -20,13 +19,9 @@ import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 import com.e.crud_sqlite.model.Client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_EMAIL;
-import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_NAME;
-import static com.e.crud_sqlite.utility.ClientUtility.COLUMN_TELEPHONE;
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
+import static com.e.crud_sqlite.utility.ClientUtility.showToast;
 
 public class UpdateFragment extends Fragment {
     private int FIRST_POSITION = 0;
@@ -54,7 +49,7 @@ public class UpdateFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_update, container, false);
         tv_tittle = rootView.findViewById(R.id.tv_updateTittle);
@@ -106,12 +101,12 @@ public class UpdateFragment extends Fragment {
                                 tbx_telephone.setVisibility(View.GONE);
                                 btn_update.setVisibility(View.GONE);
                                 tbx_idToUpdate.setText("");
-                                Toast.makeText(getContext(), R.string.UPDATED, Toast.LENGTH_SHORT).show();
+                                showToast(inflater,getContext(),"CLIENT UPDATED");
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(getContext(), R.string.NOT_FOUND, Toast.LENGTH_SHORT).show();
+                    showToast(inflater,getContext(),"NOT FOUND");
                 }
             }
         });

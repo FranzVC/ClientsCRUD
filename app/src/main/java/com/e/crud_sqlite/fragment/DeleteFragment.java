@@ -12,17 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 import com.e.crud_sqlite.model.Client;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
+import static com.e.crud_sqlite.utility.ClientUtility.showToast;
 
 public class DeleteFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
@@ -49,7 +48,7 @@ public class DeleteFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_delete, container, false);
         tbx_idDelete = rootView.findViewById(R.id.tbx_idDelete);
@@ -65,7 +64,7 @@ public class DeleteFragment extends Fragment {
                 result = connectionSQLiteHelper.deleteClient(clientId);
                 if (result)
                 {
-                    Toast.makeText(getActivity(),R.string.DELETED,Toast.LENGTH_LONG).show();
+                    showToast(inflater,getContext(),"Client removed");
                     List<Client> clients = connectionSQLiteHelper.getClients();
                     for(Client client : clients) {
                         String c = client.getName()+" "+client.getEmail()+" "+client.getTelephone() + "\n";
@@ -73,7 +72,7 @@ public class DeleteFragment extends Fragment {
                     }
                 }else
                 {
-                    Toast.makeText(getActivity(),R.string.NOT_FOUND,Toast.LENGTH_LONG).show();
+                    showToast(inflater,getContext(),"NOT FOUND");
                 }
             }
         });

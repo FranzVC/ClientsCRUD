@@ -1,16 +1,12 @@
 package com.e.crud_sqlite.fragment;
 
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
@@ -25,19 +21,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.e.crud_sqlite.MainActivity;
 import com.e.crud_sqlite.R;
 import com.e.crud_sqlite.helper.ConnectionSQLiteHelper;
 
 import static android.app.Activity.RESULT_OK;
 import static com.e.crud_sqlite.utility.ClientUtility.TABLE_CLIENTS;
 import static com.e.crud_sqlite.utility.ClientUtility.VERSION;
+import static com.e.crud_sqlite.utility.ClientUtility.showToast;
 
 public class RegisterFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int TAG_SIMPLE_NOTIFICATION = 1;
-    public static final String TAG_NOTIFICATION_FRAGMENT = "fragment_notification";
-    public static final String EXTRA_FRAGMENT_TO_LAUNCH = "fragment_to_launch";
+    //private static final int TAG_SIMPLE_NOTIFICATION = 1;
+    //public static final String TAG_NOTIFICATION_FRAGMENT = "fragment_notification";
+    //public static final String EXTRA_FRAGMENT_TO_LAUNCH = "fragment_to_launch";
 
     private EditText tbx_name, tbx_email, tbx_telephone;
     private Button btn_submit;
@@ -62,7 +58,7 @@ public class RegisterFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         tbx_name = rootView.findViewById(R.id.tbx_nameRegister);
@@ -78,10 +74,10 @@ public class RegisterFragment extends Fragment {
                 ConnectionSQLiteHelper connectionSQLiteHelper = new ConnectionSQLiteHelper(getActivity(), TABLE_CLIENTS, null, VERSION);
                 long idClient = connectionSQLiteHelper.insertClient(name, email, telephone);
                 if (idClient != -1) {
-                    Toast.makeText(getActivity(), R.string.SAVED, Toast.LENGTH_LONG).show();
+                    showToast(inflater,getContext(),"CLiENT SAVED");
                     //showSimpleNotification();
                 } else {
-                    Toast.makeText(getActivity(), R.string.ERROR, Toast.LENGTH_LONG).show();
+                    showToast(inflater,getContext(),"ERROR");
                 }
             }
         });
